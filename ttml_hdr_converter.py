@@ -19,7 +19,7 @@ class ConverterApp:
         self.destination_directory = tk.StringVar()
         self.status = tk.StringVar(value="Drop up to 100 SDR TTML files here or select them.")
 
-        root.title("TTML HDR Converter V2")
+        root.title("TTML HDR Converter V3")
         root.minsize(620, 340)
         root.columnconfigure(0, weight=1)
 
@@ -28,7 +28,7 @@ class ConverterApp:
         frame.columnconfigure(0, weight=1)
         root.rowconfigure(0, weight=1)
 
-        ttk.Label(frame, text="TTML HDR Converter V2", font=("Helvetica", 20, "bold")).grid(
+        ttk.Label(frame, text="TTML HDR Converter V3", font=("Helvetica", 20, "bold")).grid(
             row=0, column=0, sticky="w"
         )
         ttk.Label(

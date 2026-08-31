@@ -13,7 +13,7 @@ HDR_TEXT_COLOR = "#929292"
 HDR_TEXT_OPACITY = "0.80"
 HDR_TEXT_OUTLINE = "#000000 3%"
 TT_TAG = "{http://www.w3.org/ns/ttml}tt"
-STYLE_TAG = "{http://www.w3.org/ns/ttml}style"
+HEAD_TAG = "{http://www.w3.org/ns/ttml}head"
 
 
 def source_namespaces(source: str | Path | BytesIO) -> dict[str, str]:
@@ -40,16 +40,22 @@ def convert_ttml_to_hdr(ttml_data: bytes) -> tuple[bytes, int]:
     if "rec709" in normalized_profile:
         raise ValueError("The TTML profile metadata is restricted to Rec.709; review it before HDR delivery.")
 
-    updated_styles = 0
-    for element in tree.iter():
-        if element.tag == TT_TAG:
-            continue
+    def update_element(element: ET.Element) -> int:
+        if element.tag in (TT_TAG, HEAD_TAG):
+            return 0
+
+        updated_elements = 0
         if color_attribute in element.attrib:
             element.set(color_attribute, HDR_TEXT_COLOR)
-            if element.tag != STYLE_TAG:
-                element.set(opacity_attribute, HDR_TEXT_OPACITY)
+            element.set(opacity_attribute, HDR_TEXT_OPACITY)
             element.set(outline_attribute, HDR_TEXT_OUTLINE)
-            updated_styles += 1
+            updated_elements += 1
+
+        for child in element:
+            updated_elements += update_element(child)
+        return updated_elements
+
+    updated_styles = sum(update_element(child) for child in tree.getroot())
 
     if updated_styles == 0:
         raise ValueError("No tts:color attributes were found in this TTML file.")

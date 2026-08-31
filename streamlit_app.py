@@ -14,7 +14,7 @@ from ttml_conversion import convert_ttml_to_hdr, suggested_destination
 
 st.set_page_config(page_title="TTML HDR Converter", page_icon="HDR", layout="centered")
 
-st.title("TTML HDR Converter V2")
+st.title("TTML HDR Converter V3")
 st.caption("IMSC 1.1 SDR-to-HDR text style conversion")
 
 uploaded_files = st.file_uploader(
@@ -50,7 +50,7 @@ if uploaded_files:
                 st.download_button(
                     "Download HDR TTML ZIP",
                     data=archive.getvalue(),
-                    file_name="TTML_HDR_V2.zip",
+                    file_name="TTML_HDR_V3.zip",
                     mime="application/zip",
                     type="primary",
                 )
@@ -63,4 +63,4 @@ with st.expander("HDR settings applied"):
         'tts:textOutline="#000000 3%"',
         language="xml",
     )
-    st.write("TT header content remains unchanged. Style elements do not receive tts:opacity. The app requires the IMSC 1.1 Text profile and rejects Rec.709-only profile metadata.")
+    st.write("The entire TTML header remains unchanged. The app requires the IMSC 1.1 Text profile and rejects Rec.709-only profile metadata.")

@@ -1,4 +1,4 @@
-# TTML HDR Converter V2
+# TTML HDR Converter V3
 
 A small app for converting SDR IMSC TTML text styles to HDR settings.
 
@@ -16,4 +16,4 @@ No administrator permissions are needed: the launcher creates its `.venv` inside
 
 Drop up to 100 SDR `.ttml` files into the window, choose an output folder, and select **Convert to HDR**. Source files are never overwritten.
 
-For each non-header element with `tts:color`, the converter applies `tts:color="#929292"` and `tts:textOutline="#000000 3%"`. Non-style elements also receive `tts:opacity="0.80"`; style elements do not. The `<tt>` header element is not changed. It requires the IMSC 1.1 Text profile and rejects Rec.709-only profile metadata. All other TTML content is preserved and the output is UTF-8 XML.
+For each body element with `tts:color`, the converter applies `tts:color="#929292"`, `tts:opacity="0.80"`, and `tts:textOutline="#000000 3%"`. The entire `<head>` element and the `<tt>` root attributes are not changed. It requires the IMSC 1.1 Text profile and rejects Rec.709-only profile metadata. All other TTML content is preserved and the output is UTF-8 XML.

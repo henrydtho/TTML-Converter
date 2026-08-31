@@ -28,7 +28,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='TTML HDR Converter v2',
+    name='TTML HDR Converter v3',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -47,11 +47,11 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='TTML HDR Converter v2',
+    name='TTML HDR Converter v3',
 )
 app = BUNDLE(
     coll,
-    name='TTML HDR Converter v2.app',
+    name='TTML HDR Converter v3.app',
     icon=None,
     bundle_identifier=None,
 )
